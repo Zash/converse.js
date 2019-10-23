@@ -50,8 +50,27 @@ const XFORM_TYPE_MAP = {
     'list-multi': 'dropdown'
 };
 
+const XFORM_VALIDATE_TYPE_MAP = {
+	'xs:anyURI': 'url',
+	'xs:byte': 'number',
+	'xs:date': 'date',
+	'xs:dateTime': 'datetime',
+	'xs:int': 'number',
+	'xs:integer': 'number',
+	'xs:language': 'language',
+	'xs:time': 'time',
+}
+
 function getInputType(field) {
-	return XFORM_TYPE_MAP[field.getAttribute('type')]
+	var type = XFORM_TYPE_MAP[field.getAttribute('type')]
+	if (type == 'text') {
+		var datatypes = field.getElementsBy("http://jabber.org/protocol/xdata-validate", "validate");
+		if (datatypes.length === 1) {
+			var datatype = datatypes[0];
+			type = XFORM_VALIDATE_TYPE_MAP[itemtype] || type;
+		}
+	}
+	return type;
 }
 
 function slideOutWrapup (el) {
