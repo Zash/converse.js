@@ -57,7 +57,7 @@ export default (o) => {
                     <span class="modal-alert"></span>
                     <div class="room-info">
                         <p class="room-info"><strong>${i18n_name}</strong>: ${o.name}</p>
-                        <p class="room-info"><strong>${i18n_address}</strong>: ${o.jid}</p>
+                        <p class="room-info"><strong>${i18n_address}</strong>: <a href="xmpp:${encodeURI(o.jid)}?join">${o.jid}</a></p>
                         <p class="room-info"><strong>${i18n_desc}</strong>: ${o.config.description}</p>
                         ${ (o.subject) ? subject(o) : '' }
                         <p class="room-info"><strong>${i18n_online_users}</strong>: ${o.num_occupants}</p>
